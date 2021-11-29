@@ -18,6 +18,8 @@ Navigation
 
 Footer - some random information
 
+**Vuetify**: app, toolbar, spacer, footer
+
 ### Pages
 
 Posts
