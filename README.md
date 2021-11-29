@@ -64,7 +64,7 @@ My Post Detail
 My Post Create/Update
 
 - form for create/update post by current user
-- **view**: text imputs for title
+- **view**: text inputs for title, content, main image and area to upload and sort images
 - **path**: "/user/posts/create"
 - authenticated
 - **components**: PostForm
@@ -76,6 +76,7 @@ My Post Create/Update
 Register
 
 - form for registration
+- **view**: text inputs for name, surname, email and password, button for submit
 - **path**: "/register"
 - un-authenticated
 - **endpoints**: "/users/register"
@@ -84,6 +85,7 @@ Register
 Login
 
 - form for login
+- **view**: text inputs for email and password, link to register page, button for submit
 - **path**: "/login"
 - un-authenticated
 - nuxt-auth
