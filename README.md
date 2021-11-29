@@ -1,69 +1,143 @@
-# test
+# Pixelfield Issue - Blog
 
-## Build Setup
+Jana Schořová
 
-```bash
-# install dependencies
-$ npm install
+## Development plan
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+### Layout
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+Header - logo
 
-# generate static project
-$ npm run generate
-```
+Navigation
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+- Home
+- Register (un-authenticated)
+- Login (un-authenticated)
+- My Posts (authenticated)
+- Logout (authenticated) -> method in default
 
-## Special Directories
+Footer - some random information
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+### Pages
 
-### `assets`
+Posts
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+- all posts from everyone
+- **view**: 6 cards of posts, pagination, image thumbnail, title, fullname of author, create date, eg. 60 characters from content and link to post detail in card
+- **path**: "/" or "/posts"
+- un-authenticated, authenticated
+- **components**: PostList
+- **endpoints**: "/blog/posts"
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+Post Detail
 
-### `components`
+- detail of one post
+- **view**: image, title, update date, content, images, author (avatar, fullname, email), comments cards(avatar, fullname, email, create date, text of comment, to auhenticated user delete button on his comments)
+- **path**: "/posts/{slug}"
+- un-authenticated
+- authenticated: can add comments
+- **components**: PostDetail, CommentsList
+- **endpoints**: "/blog/posts/detail/{slug}", "/blog/posts/comments/{slug}"
+- vuetify: card
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+My Posts
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+- all posts from current user
+- **view**: like all posts, button for create new post (to PostForm)
+- **path**: "/user/posts"
+- authenticated
+- **components**: PostList
+- **endpoints**: "/blog/posts" filter user = current user
 
-### `layouts`
+My Post Detail
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+- detail of post from current user
+- **view**: like post detail, added buttons for edit and delete post
+- **path**: "/user/posts/{slug}"
+- authenticated
+- **components**: PostDetail with buttons
+- **endpoints**: "blog/posts/detail/{slug}"
+- **vuetify**: card, button
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+My Post Create/Update
 
+- form for create/update post by current user
+- **view**: text imputs for title
+- **path**: "/user/posts/create"
+- authenticated
+- **components**: PostForm
+- **endpoints**:
+  - create: "/blog/posts/create"
+  - edit: "/blog/posts/detail/{slug}", "/blog/posts/update/{id}"
+  - both: "/blog/posts/image/add", "blog/posts/image/update/{id}"
 
-### `pages`
+Register
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+- form for registration
+- **path**: "/register"
+- un-authenticated
+- **endpoints**: "/users/register"
+- **vuetify**: form, text-field, btn, card
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+Login
 
-### `plugins`
+- form for login
+- **path**: "/login"
+- un-authenticated
+- nuxt-auth
+- **vuetify**: form, text-field, btn, card
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+### Components
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+PostList
 
-### `static`
+- list of posts
+- components: PostCard
+- vuetify: pagination
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
+PostCard
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
+- one of posts, card of post
+- data by props
+- vuetify: card
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+PostDetail
 
-### `store`
+- detail of post
+- vuetify: img
 
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+CommentsList
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+- list of comments under post detail
+- components: CommentCard
+
+CommentCard
+
+- one of comments under post detail
+- data by props
+- vuetify: img, avatar
+
+PostForm
+
+- form for create/update post
+- props: edit=boolean, id=post_id if edit
+- vuetify: form, text-field, btn, card
+- drag and drop? I dont know how to do that => new component
+
+### Nuxt Auth
+
+- email and password
+- login endpoint: "/users/auth"
+
+redirect: {
+login: "/login",
+logout: "/",
+home: "/"
+}
+
+### Steps
+
+1. create templates for all pages without authentication and data fetching
+2. test templates with dummy data
+3. add data fetching
+4. add authentication and pages permission to authenticated user
