@@ -9,7 +9,7 @@
       <h4>{{ fullname }}</h4>
       <span>{{ user.email }}</span
       ><br />
-      <span>{{ created }}</span>
+      <span>{{ created.toLocaleDateString('cs-CZ') }}</span>
     </div>
     <div class="comment-content">
       <p>{{ text }}</p>

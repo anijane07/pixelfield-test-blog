@@ -5,7 +5,9 @@
       <div class="post-content">
         <div class="post-header">
           <h2>{{ post.title }}</h2>
-          <span>Last update: {{ post.updated }}</span>
+          <span
+            >Last update: {{ post.updated.toLocaleDateString('cs-CZ') }}</span
+          >
         </div>
         <p>{{ post.content }}</p>
       </div>

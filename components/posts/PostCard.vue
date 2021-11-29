@@ -2,7 +2,10 @@
   <v-card max-width="350">
     <v-img max-height="200" :src="imageThumb"></v-img>
     <v-card-title>{{ title }}</v-card-title>
-    <v-card-subtitle>{{ fullname }}, created on {{ date }}</v-card-subtitle>
+    <v-card-subtitle
+      >{{ fullname }}, created on
+      {{ created.toLocaleDateString('cs-CZ') }}</v-card-subtitle
+    >
     <v-card-text>{{ content.substring(0, 50) + '...' }}</v-card-text>
     <v-card-actions>
       <v-btn text :to="pathToPost" nuxt>More</v-btn>
@@ -19,11 +22,6 @@ export default {
   computed: {
     fullname() {
       return `${this.user.name} ${this.user.surname}`
-    },
-    date() {
-      return `${this.created.getDate()}.${
-        this.created.getMonth() + 1
-      }.${this.created.getFullYear()}`
     },
     pathToPost() {
       return `/posts/${this.slug}`

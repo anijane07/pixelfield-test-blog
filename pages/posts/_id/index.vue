@@ -25,7 +25,7 @@ export default {
         surname: 'Trem',
         email: 'j.trem@email.com',
       },
-      created_on: new Date(2018 - 11 - 21),
+      created_on: new Date('2018-11-21'),
       text: 'Nice post, I would like to get other post by you.',
     }
   },
