@@ -46,12 +46,12 @@ My Posts
 
 - all posts from current user
 - **view**: like all posts, button for create new post (to PostForm)
-- **path**: "/user/posts"
+- **path**: "/posts/user"
 - authenticated
 - **components**: PostList
 - **endpoints**: "/blog/posts" filter user = current user
 
-My Post Detail
+My Post Detail - same as Post Detail, buttons will be added when user is authenticated and owns this post
 
 - detail of post from current user
 - **view**: like post detail, added buttons for edit and delete post
@@ -65,7 +65,7 @@ My Post Create/Update
 
 - form for create/update post by current user
 - **view**: text inputs for title, content, main image and area to upload and sort images
-- **path**: "/user/posts/create"
+- **path**: "/posts/create"
 - authenticated
 - **components**: PostForm
 - **endpoints**:
@@ -142,6 +142,6 @@ home: "/"
 ### Steps
 
 1. create templates for all pages without authentication and data fetching
-2. test templates with dummy data
+2. test templates with dummy data - no need
 3. add data fetching
 4. add authentication and pages permission to authenticated user
