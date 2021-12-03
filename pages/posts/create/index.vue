@@ -1,7 +1,5 @@
 <template>
-  <v-card class="form-card">
-    <PostForm />
-  </v-card>
+  <PostForm />
 </template>
 
 <script>
@@ -11,11 +9,3 @@ export default {
   components: { PostForm },
 }
 </script>
-
-<style scoped>
-.form-card {
-  width: 80%;
-  margin: 5rem auto;
-  padding: 2rem;
-}
-</style>
