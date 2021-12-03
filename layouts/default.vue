@@ -6,8 +6,10 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn text to="/" nuxt>Home</v-btn>
+          <v-btn text to="/posts/user" nuxt>My Posts</v-btn>
           <v-btn text to="/register" nuxt>Register</v-btn>
           <v-btn text to="/login" nuxt>Login</v-btn>
+          <v-btn text @click="logout">Logout</v-btn>
         </v-toolbar-items>
       </v-toolbar>
     </div>
