@@ -1,6 +1,11 @@
 <template>
-  <v-form>
-    <v-text-field v-model="title" label="Title" required></v-text-field>
+  <v-form ref="form" v-model="valid" @submit.prevent="postSubmit">
+    <v-text-field
+      v-model="title"
+      :rules="[rules.required]"
+      label="Title"
+      required
+    ></v-text-field>
     <v-file-input
       v-model="image"
       accept="image/png, image/jpeg, image/bmp"
@@ -10,8 +15,14 @@
     >
     </v-file-input>
 
-    <v-textarea v-model="content" label="Content" required> </v-textarea>
-    <v-btn>{{ edit ? 'Edit' : 'Create' }}</v-btn>
+    <v-textarea
+      v-model="content"
+      :rules="[rules.required]"
+      label="Content"
+      required
+    >
+    </v-textarea>
+    <v-btn type="submit">{{ edit ? 'Edit' : 'Create' }}</v-btn>
   </v-form>
 </template>
 
@@ -19,11 +30,23 @@
 export default {
   data() {
     return {
+      valid: false,
       edit: false,
       title: '',
       image: null,
       content: '',
+
+      rules: {
+        required: (value) => !!value || 'Required.',
+      },
     }
+  },
+  methods: {
+    postSubmit() {
+      if (this.$refs.form.validate()) {
+        this.$router.replace('/')
+      }
+    },
   },
 }
 </script>
