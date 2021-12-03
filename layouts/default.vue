@@ -14,6 +14,9 @@
       </v-toolbar>
     </div>
     <Nuxt />
+    <v-footer app bottom absolute padless>
+      <v-col class="text-right"> Pixelfield Test Issue - Jana Schořová </v-col>
+    </v-footer>
   </v-app>
 </template>
 
