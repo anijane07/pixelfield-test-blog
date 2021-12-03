@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-card>
-      <v-form v-model="valid" @submit.prevent="userRegistrate">
+      <v-form ref="form" v-model="valid" @submit.prevent="userRegistrate">
         <v-text-field
           v-model="user.firstname"
           :rules="[rules.required, rules.maxTen]"

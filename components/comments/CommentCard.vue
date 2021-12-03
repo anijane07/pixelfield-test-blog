@@ -11,11 +11,13 @@
       ><br />
       <span>{{ created.toLocaleDateString('cs-CZ') }}</span>
     </div>
-    <div class="comment-content">
-      <p>{{ text }}</p>
-    </div>
-    <div class="comment-delete">
-      <v-btn><v-icon left>mdi-trash-can</v-icon>Delete</v-btn>
+    <div class="comment-right-side">
+      <div class="comment-content">
+        <p>{{ text }}</p>
+      </div>
+      <div class="comment-delete">
+        <v-btn><v-icon left>mdi-trash-can</v-icon>Delete</v-btn>
+      </div>
     </div>
   </article>
 </template>
@@ -51,6 +53,13 @@ article {
 
 .comment-person span {
   opacity: 0.7;
+}
+
+.comment-right-side {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .comment-content {
