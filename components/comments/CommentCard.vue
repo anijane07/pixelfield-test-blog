@@ -69,4 +69,21 @@ article {
 .comment-delete {
   margin: 0rem 2rem 1rem 2rem;
 }
+
+@media only screen and (max-width: 1000px) {
+  article {
+    flex-direction: column;
+  }
+
+  .comment-avatar {
+    margin: 0;
+  }
+  .comment-person {
+    text-align: center;
+  }
+
+  .comment-right-side {
+    flex-direction: column;
+  }
+}
 </style>

@@ -1,13 +1,18 @@
 <template>
-  <section class="user-posts">
-    <PostUserCard
-      :id="id"
-      :slug="slug"
-      :imageThumb="imageThumb"
-      :title="title"
-      :created="created"
-      :content="content"
-    />
+  <section>
+    <div class="new-post">
+      <v-btn color="primary" to="/posts/create" nuxt>Add New Post</v-btn>
+    </div>
+    <article class="user-posts">
+      <PostUserCard
+        :id="id"
+        :slug="slug"
+        :imageThumb="imageThumb"
+        :title="title"
+        :created="created"
+        :content="content"
+      />
+    </article>
   </section>
 </template>
 
@@ -31,8 +36,15 @@ export default {
 </script>
 
 <style scoped>
+.new-post {
+  width: 90%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .user-posts {
   width: 80%;
-  margin: 5rem auto;
+  margin: 2rem auto;
 }
 </style>

@@ -28,7 +28,10 @@ export default {
 <style scoped>
 section {
   width: 90%;
-  margin: 2rem auto;
+  margin: 2rem auto 4rem auto;
+}
+.v-card {
+  padding-bottom: 0.5rem;
 }
 .comments-title {
   margin-left: 1rem;

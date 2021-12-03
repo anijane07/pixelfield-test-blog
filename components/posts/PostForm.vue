@@ -1,5 +1,6 @@
 <template>
   <v-card class="form-card">
+    <h2>{{ edit ? 'Edit Post' : 'Create Post' }}</h2>
     <v-form ref="form" v-model="valid" @submit.prevent="postSubmit">
       <v-text-field
         v-model="title"
@@ -59,9 +60,20 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
 .form-card {
   width: 80%;
   margin: 5rem auto;
   padding: 2rem;
+}
+
+@media only screen and (max-width: 450px) {
+  .form-card {
+    width: 98%;
+  }
 }
 </style>

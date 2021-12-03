@@ -81,4 +81,10 @@ section {
 .v-card {
   padding: 2rem;
 }
+
+@media only screen and (max-width: 450px) {
+  section {
+    width: 98%;
+  }
+}
 </style>

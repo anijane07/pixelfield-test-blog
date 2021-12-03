@@ -21,11 +21,13 @@
           outlined
           @click:append="show = !show"
         ></v-text-field>
-        <v-btn type="submit">Login</v-btn>
-        <span class="link-registration"
-          >New here?
-          <nuxt-link to="/auth/register">Register now!</nuxt-link></span
-        >
+        <div class="bottom-login">
+          <v-btn type="submit">Login</v-btn>
+          <span class="link-registration">
+            New here?
+            <nuxt-link to="/auth/register">Register now!</nuxt-link>
+          </span>
+        </div>
       </v-form>
     </v-card>
   </section>
@@ -66,5 +68,31 @@ section {
 
 .link-registration {
   margin-left: 2rem;
+}
+
+.bottom-login {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 900px) {
+  section {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  section {
+    width: 98%;
+  }
+
+  .bottom-login {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bottom-login span {
+    margin-top: 2rem;
+  }
 }
 </style>

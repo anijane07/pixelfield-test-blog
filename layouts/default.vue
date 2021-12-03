@@ -20,6 +20,14 @@
   </v-app>
 </template>
 
+<script>
+export default {
+  methods: {
+    logout() {},
+  },
+}
+</script>
+
 <style scoped>
 h1 {
   font-size: 24pt;
