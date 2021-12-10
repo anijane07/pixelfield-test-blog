@@ -9,7 +9,7 @@
       <h4>{{ fullname }}</h4>
       <span>{{ user.email }}</span
       ><br />
-      <span>{{ created.toLocaleDateString('cs-CZ') }}</span>
+      <span>{{ createDate }}</span>
     </div>
     <div class="comment-right-side">
       <div class="comment-content">
@@ -28,6 +28,9 @@ export default {
   computed: {
     fullname() {
       return `${this.user.name} ${this.user.surname}`
+    },
+    createDate() {
+      return new Date(Date.parse(this.created)).toLocaleDateString('cs-CZ')
     },
   },
 }
