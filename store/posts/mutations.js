@@ -5,4 +5,7 @@ export default {
   setPages(state, pages) {
     state.totalPages = pages
   },
+  setOnePost(state, post) {
+    state.currentPost = post
+  },
 }

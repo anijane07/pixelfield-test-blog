@@ -5,4 +5,7 @@ export default {
   totalPages(state) {
     return state.totalPages
   },
+  currentPost(state) {
+    return state.currentPost
+  },
 }
