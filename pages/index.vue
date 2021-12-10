@@ -51,8 +51,8 @@ export default {
         pageSize: this.pageSize,
       }
       await this.$store.dispatch('posts/loadPosts', payload)
-      this.isLoaded = true
       this.totalPages = this.$store.getters['posts/totalPages']
+      this.isLoaded = true
     },
   },
 }

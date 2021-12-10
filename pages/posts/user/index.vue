@@ -21,6 +21,7 @@ import PostUserCard from '~/components/posts/PostUserCard.vue'
 
 export default {
   components: { PostUserCard },
+  middleware: 'auth',
   data() {
     return {
       id: 72,

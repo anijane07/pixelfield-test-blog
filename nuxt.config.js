@@ -33,7 +33,41 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'access',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: '',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: {
+            url: 'https://pfld-sandbox-voiuolbq7q-ey.a.run.app/api/users/auth/',
+            method: 'post',
+          },
+          logout: false,
+          user: {
+            url: 'https://pfld-sandbox-voiuolbq7q-ey.a.run.app/api/users/detail/',
+            method: 'get',
+          },
+        },
+        redirect: {
+          login: '/login',
+          logout: '/',
+          callback: '/login',
+          home: '/',
+        },
+      },
+    },
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

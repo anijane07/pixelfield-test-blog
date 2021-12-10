@@ -6,10 +6,14 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <v-btn text to="/" nuxt>Home</v-btn>
-          <v-btn text to="/posts/user" nuxt>My Posts</v-btn>
-          <v-btn text to="/register" nuxt>Register</v-btn>
-          <v-btn text to="/login" nuxt>Login</v-btn>
-          <v-btn text @click="logout">Logout</v-btn>
+          <v-btn v-if="!$auth.loggedIn" text to="/register" nuxt>
+            Register
+          </v-btn>
+          <v-btn v-if="!$auth.loggedIn" text to="/login" nuxt>Login</v-btn>
+          <v-btn v-if="$auth.loggedIn" text to="/posts/user" nuxt>
+            My Posts {{ $auth.user.email }}
+          </v-btn>
+          <v-btn v-if="$auth.loggedIn" text @click="logout">Logout</v-btn>
         </v-toolbar-items>
       </v-toolbar>
     </div>
@@ -23,7 +27,11 @@
 <script>
 export default {
   methods: {
-    logout() {},
+    logout() {
+      this.$auth.strategy.token.reset()
+      this.$router.replace('/')
+      this.$nuxt.refresh()
+    },
   },
 }
 </script>

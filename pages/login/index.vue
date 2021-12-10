@@ -8,13 +8,15 @@
         @submit.prevent="userLogin"
       >
         <v-text-field
-          v-model="login.email"
+          v-model="email"
+          :rules="required"
           label="Email"
           placeholder="eg. smith.j@email.com"
           outlined
         ></v-text-field>
         <v-text-field
-          v-model="login.password"
+          v-model="password"
+          :rules="required"
           :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
           :type="show ? 'text' : 'password'"
           label="Password"
@@ -38,19 +40,29 @@ export default {
   data() {
     return {
       valid: false,
-      login: {},
+      required: [(value) => !!value || 'Required.'],
+      email: '',
+      password: '',
       show: false,
     }
   },
   methods: {
     async userLogin() {
-      try {
-        await this.$auth.loginWith('local', {
-          data: this.login,
-        })
-        this.$router.push('/user')
-      } catch (err) {
-        console.log(err)
+      if (this.$refs.form.validate()) {
+        try {
+          const response = await this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          })
+          console.log(response)
+          //this.$router.push('/user')
+        } catch (err) {
+          console.log(err)
+        }
+        console.log(this.$auth.loggedIn)
+        console.log(this.$auth.user)
       }
     },
   },

@@ -31,4 +31,18 @@ export default {
     }
     context.commit('setOnePost', await response.data)
   },
+
+  async createPost(_, payload) {
+    let response
+    try {
+      response = await axios.post(
+        'https://pfld-sandbox-voiuolbq7q-ey.a.run.app/api/blog/posts/create',
+        payload
+      )
+    } catch (err) {
+      console.log(err)
+      return
+    }
+    console.log('Post created!')
+  },
 }

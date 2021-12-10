@@ -7,6 +7,7 @@ import PostForm from '~/components/posts/PostForm.vue'
 
 export default {
   components: { PostForm },
+  middleware: 'auth',
   computed: {
     post() {
       return {
