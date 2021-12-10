@@ -1,21 +1,16 @@
 <template>
-  <section>
-    <article>
-      <PostCard
-        v-for="post in posts"
-        :key="post.id"
-        :imageThumb="post.image_thumb"
-        :title="post.title"
-        :created="post.created_on"
-        :content="post.content"
-        :user="post.user"
-        :slug="post.slug"
-      />
-    </article>
-    <div class="text-center pagination">
-      <v-pagination v-model="page" :length="pagesCount"></v-pagination>
-    </div>
-  </section>
+  <article>
+    <PostCard
+      v-for="post in posts"
+      :key="post.id"
+      :imageThumb="post.image_thumb"
+      :title="post.title"
+      :created="post.created_on"
+      :content="post.content"
+      :user="post.user"
+      :slug="post.slug"
+    />
+  </article>
 </template>
 
 <script>
@@ -23,9 +18,13 @@ import PostCard from '~/components/posts/PostCard.vue'
 
 export default {
   components: { PostCard },
-  data() {
-    return {
-      page: 1,
+  props: {
+    posts: Array,
+    totalPages: Number,
+  },
+}
+
+/* page: 1,
       pagesCount: 6,
       posts: [
         {
@@ -102,10 +101,7 @@ export default {
             surname: 'Threamin',
           },
         },
-      ],
-    }
-  },
-}
+      ], */
 </script>
 
 <style scoped>
@@ -115,9 +111,5 @@ article {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-}
-
-.pagination {
-  margin-bottom: 4rem;
 }
 </style>
