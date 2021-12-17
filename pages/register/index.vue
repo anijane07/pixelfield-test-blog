@@ -1,7 +1,12 @@
 <template>
   <section>
     <v-card>
-      <v-form ref="form" v-model="valid" @submit.prevent="userRegistrate">
+      <v-form
+        id="registrationForm"
+        ref="form"
+        v-model="valid"
+        @submit.prevent="userRegistrate"
+      >
         <v-text-field
           v-model="user.email"
           :rules="[rules.required, rules.email]"
@@ -25,14 +30,14 @@
 
         <v-text-field v-model="user.lastname" label="Last name"></v-text-field>
 
-        <!-- <v-file-input
-          v-model="user.avatar"
+        <v-file-input
+          @change="handleFile"
           accept="image/png, image/jpeg, image/bmp"
           placeholder="Pick an image"
           prepend-icon="mdi-camera"
           label="Avatar"
         >
-        </v-file-input> -->
+        </v-file-input>
         <p class="form-error" v-if="userTry">
           You must fill all required fields!
         </p>
@@ -54,7 +59,7 @@ export default {
         lastname: '',
         email: '',
         password: '',
-        //avatar: '',
+        avatar: '',
       },
 
       rules: {
@@ -65,19 +70,26 @@ export default {
     }
   },
   methods: {
+    handleFile(file) {
+      console.log(file)
+      this.user.avatar = file
+    },
     async userRegistrate() {
       this.userTry = true
       if (this.$refs.form.validate()) {
         this.userTry = false
-        const response = await this.$store.dispatch('users/registrateUser', {
-          email: this.user.email,
-          password: this.user.password,
-          name: this.user.firstname,
-          surname: this.user.lastname,
-          //avatar: this.user.avatar,
-        })
-        console.log(response)
-        if (response.ok) {
+        let formData = new FormData()
+        formData.append('email', this.user.email)
+        formData.append('password', this.user.password)
+        formData.append('name', this.user.firstname)
+        formData.append('surname', this.user.lastname)
+        formData.append('avatar', this.user.avatar)
+        //console.log(formData)
+        const response = await this.$store.dispatch(
+          'users/registrateUser',
+          formData
+        )
+        if (response) {
           await this.$auth.loginWith('local', {
             data: {
               email: this.user.email,

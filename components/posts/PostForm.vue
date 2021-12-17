@@ -52,6 +52,14 @@ export default {
   methods: {
     postSubmit() {
       if (this.$refs.form.validate()) {
+        if (this.edit) {
+        } else {
+          this.$store.dispatch('posts/createPost', {
+            image: this.image,
+            title: this.title,
+            content: this.content,
+          })
+        }
         this.$router.replace('/')
       }
     },

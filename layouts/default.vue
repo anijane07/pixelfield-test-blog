@@ -27,10 +27,8 @@
 <script>
 export default {
   methods: {
-    logout() {
-      this.$auth.strategy.token.reset()
-      this.$router.replace('/')
-      this.$nuxt.refresh()
+    async logout() {
+      await this.$auth.logout()
     },
   },
 }
