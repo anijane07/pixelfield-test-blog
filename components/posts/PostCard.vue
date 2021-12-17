@@ -23,8 +23,6 @@ export default {
       return `${this.user.name} ${this.user.surname}`
     },
     createDate() {
-      console.log('cas:')
-      console.log(this.created)
       return new Date(Date.parse(this.created)).toLocaleDateString('cs-CZ')
     },
     pathToPost() {

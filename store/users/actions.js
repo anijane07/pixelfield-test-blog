@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export default {
   async registrateUser(_, payload) {
     console.log('Action: registre')
@@ -9,8 +7,8 @@ export default {
     }
     try {
       console.log('try registrate')
-      response = await axios.post(
-        'https://pfld-sandbox-voiuolbq7q-ey.a.run.app/api/users/register/',
+      response = await this.$axios.$post(
+        `${this.$axios.defaults.baseURL}/users/register/`,
         payload,
         { headers: headers }
       )
