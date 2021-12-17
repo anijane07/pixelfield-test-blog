@@ -35,6 +35,10 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
 
+  axios: {
+    baseURL: 'https://pfld-sandbox-voiuolbq7q-ey.a.run.app/api',
+  },
+
   auth: {
     strategies: {
       local: {

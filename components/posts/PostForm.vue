@@ -11,7 +11,7 @@
       <v-img max-width="300" v-if="image" :src="image"></v-img>
       <p v-if="image">You can reupload you image here:</p>
       <v-file-input
-        v-model="image"
+        @change="handleFile"
         accept="image/png, image/jpeg, image/bmp"
         placeholder="Pick an image"
         prepend-icon="mdi-camera"
@@ -41,7 +41,7 @@ export default {
       valid: false,
       edit: this.post ? true : false,
       title: this.post?.title || '',
-      image: this.post?.image || null,
+      image: this.post?.image || '',
       content: this.post?.content || '',
 
       rules: {
@@ -50,15 +50,18 @@ export default {
     }
   },
   methods: {
+    handleFile(file) {
+      this.image = file
+    },
     postSubmit() {
       if (this.$refs.form.validate()) {
         if (this.edit) {
         } else {
-          this.$store.dispatch('posts/createPost', {
-            image: this.image,
-            title: this.title,
-            content: this.content,
-          })
+          let formData = new FormData()
+          formData.append('title', this.title)
+          formData.append('content', this.content)
+          formData.append('image', this.image)
+          this.$store.dispatch('posts/createPost', formData)
         }
         this.$router.replace('/')
       }
