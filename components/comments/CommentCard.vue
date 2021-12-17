@@ -15,8 +15,10 @@
       <div class="comment-content">
         <p>{{ text }}</p>
       </div>
-      <div class="comment-delete">
-        <v-btn><v-icon left>mdi-trash-can</v-icon>Delete</v-btn>
+      <div v-if="userComment" class="comment-delete">
+        <v-btn @click="deleteComment"
+          ><v-icon left>mdi-trash-can</v-icon>Delete</v-btn
+        >
       </div>
     </div>
   </article>
@@ -24,13 +26,21 @@
 
 <script>
 export default {
-  props: ['user', 'created', 'text'],
+  props: ['user', 'created', 'text', 'id'],
   computed: {
     fullname() {
       return `${this.user.name} ${this.user.surname}`
     },
     createDate() {
       return new Date(Date.parse(this.created)).toLocaleDateString('cs-CZ')
+    },
+    userComment() {
+      return this.$auth.loggedIn && this.$auth.user.email === this.user.email
+    },
+  },
+  methods: {
+    async deleteComment() {
+      await this.$store.dispatch('comments/deleteComment', this.id)
     },
   },
 }

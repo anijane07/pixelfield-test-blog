@@ -6,6 +6,7 @@
       :user="comment.user"
       :created="comment.created_on"
       :text="comment.text"
+      :id="comment.id"
     />
   </div>
 </template>

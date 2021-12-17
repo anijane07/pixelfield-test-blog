@@ -26,6 +26,19 @@
         <div class="text-center pagination">
           <v-pagination v-model="page" :length="totalPages"></v-pagination>
         </div>
+        <div class="comment-form">
+          <h4>Comment {{ post.title }}</h4>
+          <v-form ref="form" v-model="valid" @submit.prevent="commentPost">
+            <v-textarea
+              outlined
+              v-model="text"
+              :rules="[rules.required]"
+              label="Text"
+              required
+            ></v-textarea>
+            <v-btn type="submit">Comment</v-btn>
+          </v-form>
+        </div>
       </div>
     </v-card>
   </section>
@@ -47,6 +60,12 @@ export default {
       page: 1,
       totalPages: 0,
       pageSize: 5,
+
+      valid: false,
+      rules: {
+        required: (value) => !!value || 'Required.',
+      },
+      text: '',
     }
   },
   created() {
@@ -71,7 +90,6 @@ export default {
       this.isLoadedPost = false
       await this.$store.dispatch('posts/getPost', this.$route.params.slug)
       this.isLoadedPost = true
-      console.log(this.$store.getters['posts/currentPost'])
     },
     async loadComments() {
       const payload = {
@@ -83,6 +101,15 @@ export default {
       await this.$store.dispatch('comments/loadComments', payload)
       this.totalPages = this.$store.getters['comments/totalPages']
       this.isLoadedComments = true
+    },
+    async commentPost() {
+      await this.$store.dispatch('comments/createComment', {
+        text: this.text,
+        post: this.post.id,
+      })
+      this.loadComments()
+      //okno uspesne okomentovano
+      //this.$router.push(`/posts/${this.post.slug}`)
     },
   },
 }
@@ -101,5 +128,10 @@ section {
 }
 .pagination {
   margin-bottom: 4rem;
+}
+
+.comment-form {
+  width: 90%;
+  margin: auto;
 }
 </style>
